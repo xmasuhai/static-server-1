@@ -30,7 +30,7 @@ var server = http.createServer(function (request, response) {
   const suffixIndex = filePath.lastIndexOf('.')
   // suffix 是后缀
   const suffix = filePath.substring(suffixIndex)
-  const suffixTypeName = suffix.replace('.', '')
+  const suffixTypeName = 'text/' + suffix.replace('.', '')
 
   const fileTypes = {
     '.html': 'text/html',
@@ -45,7 +45,7 @@ var server = http.createServer(function (request, response) {
     '.jpg': 'image/jpeg'
   }
   response.setHeader('Content-Type',
-    `${fileTypes[suffix] || suffixTypeName};charset=utf-8`)
+    `${fileTypes[suffix] || suffixTypeName ||text/html };charset=utf-8`)
   let content
   try {
     content = fs.readFileSync(`./public${filePath}`)
